@@ -8,6 +8,8 @@
 
 using namespace std;
 
+bool test_sqrts(double max);
+
 int main()
 {
 	auto sr = bssqrt(4);
@@ -25,7 +27,24 @@ int main()
 	auto sr4 = bssqrt(13);
 	auto sr4b = std::sqrt(13);
 
+	auto b = test_sqrts(1000.0);
+
 
 	cout << "Hello CMake." << endl;
 	return 0;
+}
+
+bool test_sqrts(double max)
+{
+	for (double d = 0; d < max; d++)
+	{
+		auto bsqr_ans = bssqrt(d);
+		auto stl_ans = std::sqrt(d);
+
+		if (!real_equals(bsqr_ans, stl_ans, get_precision()))		
+		{
+			return false;
+		}
+	}
+	return true;
 }
